@@ -2,12 +2,14 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
+import instructorRouter from "./routes/instructorRoutes.js";
 // import cors from 'cors';
 
 dotenv.config();
 const app= express();
 app.use(bodyParser.json({limit: '30mb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '30mb', extended: true}));
+app.use("/api/instructor",instructorRouter);
 
 const PORT  = process.env.PORT;
 // .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))

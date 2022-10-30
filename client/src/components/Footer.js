@@ -3,13 +3,7 @@ import Flogo from '../images/Flogo.png'
 function Footer() {
   return (
     <div className='bg-dark text-white  footer'>
-        
-
-
         <div className="d-flex justify-content-around pt-5 pb-2">
-        
-       
-   
         <ul className="flex-item text-white ">
             <li><a  className=" text-white link1  " href="" >Udemy Business</a></li>
             <li><a className=" text-white link1" href="">Teach on Udemy</a></li>

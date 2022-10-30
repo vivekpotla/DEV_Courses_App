@@ -14,7 +14,7 @@ import Teach from './components/Teach'
 import Design from './components/Design';
 import Health from './components/Health';
 import Personal from './components/personal';
-import Login from './components/Login';
+import Login from './components/LoginComponent/Login.js';
 function App() {
   return (
     <div>

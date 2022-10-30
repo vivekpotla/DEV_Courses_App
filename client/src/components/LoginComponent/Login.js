@@ -1,6 +1,6 @@
 import React from 'react'
 import './Login.css'
-import {FaUserAlt} from 'react-icons/fa'
+// import {FaUserAlt} from 'react-icons/fa'
 import {MdEmail} from 'react-icons/md'
 import {RiLockPasswordFill} from 'react-icons/ri'
 import {BsFillTelephoneFill} from 'react-icons/bs'
@@ -45,7 +45,7 @@ function SignUp() {
 
                   <div class="form-check d-flex justify-content-end mb-5">
                     <label class="form-check-label" for="form2Example3">
-                      <a href="#!">Forget Password?</a>
+                      <a href="#!">Forgot Password?</a>
                     </label>
                   </div>
 

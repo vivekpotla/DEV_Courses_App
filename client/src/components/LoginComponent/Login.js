@@ -1,18 +1,56 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Login.css'
-// import {FaUserAlt} from 'react-icons/fa'
+import {FaUserAlt} from 'react-icons/fa'
 import {MdEmail} from 'react-icons/md'
 import {RiLockPasswordFill} from 'react-icons/ri'
 import {BsFillTelephoneFill} from 'react-icons/bs'
 import {useForm} from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import {useDispatch} from 'react-redux';
+import axios from "axios";
+import useButtonLoader from '../useButtonLoader'
+import {authActions} from "../../store";
 
-function SignUp() {
 
-    let {register, handleSubmit, formState:{errors}} = useForm()
-    
-    const onFormSubmit = (userObj)=>{
-        console.log(userObj)
+function Login() {
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [check, setCheck] = useState(false);
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const [loginButton,isLoading] = useButtonLoader("Login","Logging In...");
+  const onFormSubmit = (userCredObj) => {
+    const sendRequest = async () => {
+      isLoading(true);
+      const res = await axios.post("http://localhost:5003/api/instructor/login",
+        {
+          email: userCredObj.email,
+          password: userCredObj.password
+        }).catch(err => {
+          setCheck(true);
+          isLoading(false);
+        });
+
+      const data = await res.data;
+      // console.log(data);
+      return data;
+
     }
+    sendRequest()
+      .then((data) => {
+       
+          localStorage.setItem("userId", data.user._id);
+          setCheck(false);
+          dispatch(authActions.login());
+          isLoading(false);
+          navigate("/");
+          
+      
+      })
+
+
+
+  }
   return (
     <div>
         <section className="vh-100">
@@ -45,12 +83,12 @@ function SignUp() {
 
                   <div class="form-check d-flex justify-content-end mb-5">
                     <label class="form-check-label" for="form2Example3">
-                      <a href="#!">Forgot Password?</a>
+                      <a href="#!">Forget Password?</a>
                     </label>
                   </div>
 
                   <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" className="btn btn-primary btn-lg">Login</button>
+                    <button type="submit" ref={loginButton} className="btn btn-primary btn-lg">Login</button>
                   </div>
 
                 </form>
@@ -72,4 +110,4 @@ function SignUp() {
   )
 }
 
-export default SignUp
+export default Login

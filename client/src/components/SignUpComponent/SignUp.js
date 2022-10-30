@@ -5,14 +5,37 @@ import {MdEmail} from 'react-icons/md'
 import {RiLockPasswordFill} from 'react-icons/ri'
 import {BsFillTelephoneFill} from 'react-icons/bs'
 import {useForm} from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
+import useButtonLoader from '../useButtonLoader';
+import axios from "axios";
 
 function SignUp() {
 
-    let {register, handleSubmit, formState:{errors}} =useForm()
-    
-    const onFormSubmit = (userObj)=>{
-        console.log(userObj)
+  const navigate = useNavigate();
+  const { register, handleSubmit, formState: { errors } } = useForm();
+  const[signupButton,isLoading]  = useButtonLoader("Signup","Processing...");
+  const onFormSubmit=(userCredObj)=>
+  {
+    console.log(userCredObj);
+    const sendRequest = async ()=>
+    {
+      isLoading(true);
+      const res = await axios.post("http://localhost:5003/api/learner/signup",
+      {
+        name : userCredObj.name,
+        email:userCredObj.email,
+        password : userCredObj.password,
+        mobileno : userCredObj.phone
+      }).catch((err)=>isLoading(false))
+      const data = await res.data;
+      return data;
+
     }
+    sendRequest()
+    .then(()=>isLoading(false))
+    .then(()=>navigate("/login"));
+  }
+
   return (
     <div>
         <section className="vh-100">
@@ -64,7 +87,7 @@ function SignUp() {
                   </div>
 
                   <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                    <button type="submit" className="btn btn-primary btn-lg">Register</button>
+                    <button ref={signupButton} type="submit" className="btn btn-primary btn-lg">Register</button>
                   </div>
 
                 </form>

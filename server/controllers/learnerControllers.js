@@ -42,11 +42,11 @@ export const signInLearner= expressAsyncHandler(async (req, res) => {
 // for a learner sign-up.
 export const signUpLearner= expressAsyncHandler(async (req, res) => {
 
-    let newLearnerObj= req.body;
+    let {name,email,password,mobileno}= req.body;
 
     // check if a Learner already exists.
     let existingLearnerObj= await Learner.findOne({ 
-            email: newLearnerObj.email
+            email
     });
 
     // if a Learner with such credentials already exists.
@@ -55,11 +55,16 @@ export const signUpLearner= expressAsyncHandler(async (req, res) => {
     }
 
     // we can hash the password as the Learner already doesn't exist.
-    let hashedPswd= await bcryptjs.hash(newLearnerObj.password, 6);
-    newLearnerObj.password= hashedPswd;
+    let hashedPswd= await bcryptjs.hash(password, 6);
 
     // create the given Learner as a doc of our Learner schema type.
-    const learner= new Learner(newLearnerObj);
+    const learner= new Learner({
+        name,
+        email,
+        password : hashedPswd,
+        mobileno,
+        enrolledCourses : []
+    });
     
     // to save the doc inside the DB.
     await learner.save();

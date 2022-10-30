@@ -1,17 +1,22 @@
 import React from 'react'
 import Logo from '../images/Logo.png'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import {Form,FormControl,Button,Dropdown} from 'react-bootstrap'
  import {FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBars, faBell, faCartArrowDown, faHeart, faUser } from '@fortawesome/free-solid-svg-icons'
 import {useState} from 'react'
 import Offcanvas from 'react-bootstrap/Offcanvas'
+import { useDispatch, useSelector } from 'react-redux'
+import {authActions} from "../store/index.js";
 
 // import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 // import {Form} from 'react-bootstrap/Form'
 function Header() {
 
  
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
     const [show, setShow] = useState(false);
   
     const handleClose = () => setShow(false);
@@ -75,6 +80,7 @@ function Header() {
          <div className=" nav-item collapse navbar-collapse" id="navbarNavDropDown">
   
             <ul className="navbar-nav navbar-collapse justify-content-between p-0" >
+          {!isLoggedIn &&
                  
           <li className="nav-item ">
                         {/* <Button className="btn border-0 bg-light text-dark shadow-none ms-3" >Categories</Button> */}
@@ -94,6 +100,7 @@ function Header() {
                    </Dropdown.Menu>
              </Dropdown>
           </li>
+           }
 
 
                 <li className="nav-item ">
@@ -114,27 +121,29 @@ function Header() {
 
                  </li>
      
-                 <li className="nav-item na me-5">
-                     <Link className="nav-link text-dark" to="teach" >Teach on Udemy</Link>
-                 </li>
-
-                 <li className="nav-item na me-5">
-                     <Link className="nav-link text-dark" to="mylearning" >My learning</Link>
-                 </li>
+               
                  
-
-                 <li>
-                <Link className='nav-link text-dark' to='wishlist'><FontAwesomeIcon icon={faHeart} className='fa-lg'/></Link>
-                 </li>
-                 <li>
-                 <Link className='nav-link text-dark' to='cart'><FontAwesomeIcon icon={faCartArrowDown} className='fa-lg'/></Link>
-                 </li>
-                 <li className='me-3'>
-                 <Link className='nav-link text-dark' to='notifications'><FontAwesomeIcon icon={faBell} className='fa-lg'/></Link>
-                
-                 </li>
+   {isLoggedIn &&
+   <>
+   <li>
+   <Link className='nav-link text-dark' to='wishlist'><FontAwesomeIcon icon={faHeart} className='fa-lg'/></Link>
+    </li>
+    <li>
+    <Link className='nav-link text-dark' to='cart'><FontAwesomeIcon icon={faCartArrowDown} className='fa-lg'/></Link>
+    </li>
+    <li className='me-3'>
+    <Link className='nav-link text-dark' to='notifications'><FontAwesomeIcon icon={faBell} className='fa-lg'/></Link>
+   
+    </li>
+    <li className='me-5'>
+    <Link className='nav-link text-dark' to='login'><FontAwesomeIcon icon={faUser} onClick={() => {
+   dispatch(authActions.logout());
+   navigate("/");}} className='fa-lg'/></Link> 
+   </li>
+   </> }
+               
                  <li className='me-5'>
-                 <Link className='nav-link text-dark' to='login'><FontAwesomeIcon icon={faUser} className='fa-lg'/></Link>
+                 <Link className='nav-link text-dark' to='login'>LOGIN</Link>
                  </li>
            </ul>
  
@@ -145,21 +154,9 @@ function Header() {
 </div>
 <hr className='m-0 p-0'/>
 
-{/* Second nav Bar */}
-{/* <nav  className="navbar navbar-expand navbar-collapse-sm bg-white text-dark p-1 m-0  shadow" >
-<ul className="navbar-nav navbar-collapse d-flex justify-content-center gap-5  ms-4 me-4 " >
-  <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='development'>Development</Link></li>
-  <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='marketing'>Marketing</Link></li>
-  <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='itsoftware'>IT & Software</Link></li>
-  <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='design'>Design</Link></li>
-  <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='personal'>Personal Development</Link></li>
-  <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='business'>Business</Link></li>
-  <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='music'>Music</Link></li>
-  <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='health'>Health & Fitness</Link></li>
-</ul>
-
-</nav> */}
-<nav className=" navbar navbar-expand-lg bg-light   m-0 p-0 justify-content-between gap-2 w-100">
+{
+  isLoggedIn && 
+  <nav className=" navbar navbar-expand-lg bg-light   m-0 p-0 justify-content-between gap-2 w-100">
          <div className=" nav-item collapse navbar-collapse" id="navbarNavDropDown">
   
          <ul className="navbar-nav navbar-collapse d-flex justify-content-center gap-5  ms-4 me-4 " >
@@ -172,14 +169,10 @@ function Header() {
               <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='music'>Music</Link></li>
               <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='health'>Health & Fitness</Link></li>
          </ul>
-                  
-     
-
-      
-
         </div>
-
 </nav>
+}
+
 <hr className='m-0 p-0'/>
 
     </div>

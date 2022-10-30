@@ -19,6 +19,7 @@ import SignUp from './components/SignUpComponent/SignUp';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateCourse from "./components/course/CreateCourse.js";
 import {authActions} from "./store/index.js";
+import Profile from './components/Profile';
 
 function App() {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ function App() {
       <Route path='/business'  element={<Business/>}/>
       <Route path='/marketing' element={<Marketing/>}/>
       <Route path='/music' element={<Music/>}/>
-      
+      <Route path='/profile'element={<Profile/>} />
       <Route path='/design' element={<Design/>}/>
       <Route path='/health' element={<Health/>}/>
       <Route path='/personal' element={<Personal/>}/>

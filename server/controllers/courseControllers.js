@@ -53,13 +53,13 @@ export const getCourseById = async(req,res,next)=>
 }
 export const addCourse= async (req, res,next) => {
 
-    const {title,topic, description,startDate,startTime,price,creator} = req.body;
+    const {title,topic, description,startDate,startTime,price,creator,imageurl} = req.body;
 
     const course= new Course({
         title,
         topic,
         description,
-        startDate,startTime,price,creator,learners:[],
+        startDate,startTime,price,creator,learners:[],imageurl
     });
     let existingUser;
 

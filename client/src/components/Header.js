@@ -80,7 +80,7 @@ function Header() {
          <div className=" nav-item collapse navbar-collapse" id="navbarNavDropDown">
   
             <ul className="navbar-nav navbar-collapse justify-content-between p-0" >
-          {!isLoggedIn &&
+          {isLoggedIn &&
                  
           <li className="nav-item ">
                         {/* <Button className="btn border-0 bg-light text-dark shadow-none ms-3" >Categories</Button> */}
@@ -101,6 +101,27 @@ function Header() {
              </Dropdown>
           </li>
            }
+           {!isLoggedIn &&
+                 
+                 <li className="nav-item ">
+                               {/* <Button className="btn border-0 bg-light text-dark shadow-none ms-3" >Categories</Button> */}
+                     <Dropdown className=''>
+                                   <Dropdown.Toggle  id="dropdown-basic" className='bg-light text-dark shadow-none border-0'>Categories</Dropdown.Toggle>
+       
+                          <Dropdown.Menu className='p-2 dropdown-menu shadow'>
+                                <Dropdown.Item  className='p-2'>Development</Dropdown.Item>
+                                <Dropdown.Item className='p-2'>Business</Dropdown.Item>
+                                <Dropdown.Item className='p-2'>Music</Dropdown.Item>
+                                <Dropdown.Item  className='p-2'>IT & Software</Dropdown.Item>
+                                <Dropdown.Item className='p-2'>Personal Development</Dropdown.Item>
+                                <Dropdown.Item  className='p-2'>Design</Dropdown.Item>
+                                <Dropdown.Item  className='p-2'>Health & Fitness</Dropdown.Item>
+                                <Dropdown.Item  className='p-2'>Marketing</Dropdown.Item>
+                                
+                          </Dropdown.Menu>
+                    </Dropdown>
+                 </li>
+                  }
 
 
                 <li className="nav-item ">
@@ -136,15 +157,19 @@ function Header() {
    
     </li>
     <li className='me-5'>
-    <Link className='nav-link text-dark' to='login'><FontAwesomeIcon icon={faUser} onClick={() => {
-   dispatch(authActions.logout());
-   navigate("/");}} className='fa-lg'/></Link> 
+    <Link className='nav-link text-dark' to='login'><FontAwesomeIcon icon={faUser}  className='fa-lg'/></Link> 
    </li>
+   <li className='me-5'>
+    <Link className='nav-link text-dark' to='login'   onClick={() => {
+   dispatch(authActions.logout());
+   navigate("/");}}>LOGOUT</Link> 
+   </li>
+ 
    </> }
                
-                 <li className='me-5'>
+               {!isLoggedIn && <li className='me-5'>
                  <Link className='nav-link text-dark' to='login'>LOGIN</Link>
-                 </li>
+                 </li> }  
            </ul>
  
 

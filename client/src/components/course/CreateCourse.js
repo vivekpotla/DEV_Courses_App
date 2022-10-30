@@ -1,15 +1,44 @@
 import React from 'react'
 import '../SignUpComponent/SignUp.css';
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import {  useNavigate } from 'react-router-dom'
 import useButtonLoader from '../useButtonLoader';
+import axios from "axios";
 
 const CreateCourse = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
+    const navigate = useNavigate();
     const [signupButton, isLoading] = useButtonLoader("Add Course", "Processing...");
+    const userId = localStorage.getItem("userId");
     const onFormSubmit = (userCredObj) => {
-
+        const sendRequest = async () => {
+            isLoading(true);
+            const res = await axios.post("http://localhost:5003/api/course/addcourse",
+              {
+                title : userCredObj.title,
+                topic : userCredObj.topic,
+                description : userCredObj.description,
+                startDate : userCredObj.startDate,
+                startTime : userCredObj.startTime,
+                price: userCredObj.price,
+                imageurl : userCredObj.imageurl,
+                creator : userId
+              
+              }).catch(err => {
+                console.log(err)
+                isLoading(false);
+              });
+      
+            const data = await res.data;
+            console.log(data);
+            return data;
+      
+          }
+          sendRequest()
+            .then((data)=>console.log(data))
+            .then(isLoading(false))
+            .then(navigate("/"))
     }
     return (
         <div>
@@ -35,7 +64,7 @@ const CreateCourse = () => {
 
                                                 <div className="d-flex flex-row align-items-center mb-4">
                                                     <img src="https://img.icons8.com/material-rounded/24/000000/topic.png" height='20px' width='20px' />
-                                                    <select class="form-select form-outline flex-fill mb-0 ms-3" aria-label="Default select example">
+                                                    <select class="form-select form-outline flex-fill mb-0 ms-3" aria-label="Default select example" {...register("topic",{required:true})}>
                                                         <option selected>Development</option>
                                                         <option value="Business">Business</option>
                                                         <option value='Music'>Music</option>

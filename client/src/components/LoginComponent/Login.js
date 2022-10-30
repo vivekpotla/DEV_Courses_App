@@ -17,7 +17,7 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [check, setCheck] = useState(false);
-  const [userType, setUserType] = useState("instructor");
+  const [userType, setUserType] = useState('instructor');
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [loginButton,isLoading] = useButtonLoader("Login","Logging In...");
   const onFormSubmit = (userCredObj) => {
@@ -41,6 +41,7 @@ function Login() {
       .then((data) => {
        
           localStorage.setItem("userId", data.user._id);
+          localStorage.setItem("userType",userType);
           setCheck(false);
           dispatch(authActions.login());
           isLoading(false);

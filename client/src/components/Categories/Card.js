@@ -8,7 +8,7 @@ export default function Card(props) {
     <div className="mt-2 w-100">
         <div className="row p-3">
             <div className="col-md-4">
-                <img src="https://wikicoding.org/wp-content/uploads/2021/08/python.jpg" className="w-100 border" alt=""/>
+                <img src={props.data.imageurl} className="w-100 border" alt=""/>
             </div>
             <div className="col-md-5">
             <h6 className="fw-bold">{props.data.title}</h6>

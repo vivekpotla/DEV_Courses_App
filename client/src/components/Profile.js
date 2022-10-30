@@ -7,21 +7,15 @@ export default function Profile() {
     const userType = localStorage.getItem("userType");
     const userId  = localStorage.getItem("userId");
     const [Data,setData] = useState(null);
-    const data = async()=>
-    {
-        const res = await axios.get(`http://localhost:5003/api/${userType}/byid/${userId}`,).catch((err)=>console.log(err));
-        return res.data;
-    }
+     
+    
     useEffect(()=>
     {
-      data()
-      .then((data)=>{setData(data.user);
-       } );
-console.log(Data);
+       axios.get(`http://localhost:5003/api/${userType}/byid/${userId}`,).catch((err)=>console.log(err)).then((res)=>setData(res.data.user));
 
     },[])
   
-    
+  console.log(Data);   
  
   return (
     <section className="vh-200" style={{ backgroundColor: '#f4f5f7' }}>
@@ -34,7 +28,7 @@ console.log(Data);
                   style={{ borderTopLeftRadius: '.5rem', borderBottomLeftRadius: '.5rem' }}>
                   <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava1-bg.webp"
                     alt="Avatar" className="my-5" style={{ width: '80px' }} fluid />
-                  <MDBTypography tag="h5">Marie Horwitz</MDBTypography>
+                  <MDBTypography tag="h5">He</MDBTypography>
                   <MDBCardText>Web Designer</MDBCardText>
                   <MDBIcon far icon="edit mb-5" />
                 </MDBCol>
@@ -43,22 +37,24 @@ console.log(Data);
                     <MDBTypography tag="h6">Information</MDBTypography>
                     <hr className="mt-0 mb-4" />
                     <MDBRow className="pt-1">
-                      <MDBCol size="6" className="mb-3">
+                      <MDBCol size="12" className="mb-3">
                         <MDBTypography tag="h6">Email</MDBTypography>
-                        <MDBCardText className="text-muted">info@example.com</MDBCardText>
+                        <MDBCardText className="text-muted"></MDBCardText>
                       </MDBCol>
-                      <MDBCol size="6" className="mb-3">
+                      <MDBCol size="12" className="mb-3">
                         <MDBTypography tag="h6">Phone</MDBTypography>
-                        <MDBCardText className="text-muted">123 456 789</MDBCardText>
+                        <MDBCardText className="text-muted"></MDBCardText>
                       </MDBCol>
                     </MDBRow>
 
-                    <MDBTypography tag="h6">Information</MDBTypography>
+                    <MDBTypography tag="h6">Courses</MDBTypography>
                     <hr className="mt-0 mb-4" />
                     <MDBRow className="pt-1">
-                      <MDBCol size="6" className="mb-3">
-                        <MDBTypography tag="h6">Email</MDBTypography>
-                        <MDBCardText className="text-muted">info@example.com</MDBCardText>
+                      <MDBCol size="12" className="mb-3">
+                        <MDBTypography tag="h6">
+                          {userType=="instructor"? "Total Courses Created":"Total Courses Enrolled"}
+                        </MDBTypography>
+                        <MDBCardText className="text-muted"></MDBCardText>
                       </MDBCol>
                       <MDBCol size="6" className="mb-3">
                         <MDBTypography tag="h6">Phone</MDBTypography>

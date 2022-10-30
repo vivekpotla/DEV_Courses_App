@@ -1,8 +1,5 @@
 import React from 'react'
 import '../SignUpComponent/SignUp.css';
-import { FaUserAlt } from 'react-icons/fa'
-import { MdEmail } from 'react-icons/md'
-import { RiLockPasswordFill } from 'react-icons/ri'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import useButtonLoader from '../useButtonLoader';
@@ -16,7 +13,7 @@ const CreateCourse = () => {
     }
     return (
         <div>
-            <section className="py-4">
+            <section className=" py-4">
                 <div className="container h-100" >
                     <div className="row d-flex justify-content-center align-items-center h-100">
                         <div className="col-lg-12 col-xl-11">
@@ -38,10 +35,16 @@ const CreateCourse = () => {
 
                                                 <div className="d-flex flex-row align-items-center mb-4">
                                                     <img src="https://img.icons8.com/material-rounded/24/000000/topic.png" height='20px' width='20px' />
-                                                    <div className="form-outline flex-fill mb-0 ms-3">
-                                                        <input type="text" id="topic" className="form-control" placeholder='Topic' {...register("topic", { required: true })} />
-                                                        {errors.topic?.type === 'required' && <p className='text-danger'>*Topic Required</p>}
-                                                    </div>
+                                                    <select class="form-select form-outline flex-fill mb-0 ms-3" aria-label="Default select example">
+                                                        <option selected>Development</option>
+                                                        <option value="Business">Business</option>
+                                                        <option value='Music'>Music</option>
+                                                        <option value='IT & Software'>IT & Software</option>
+                                                        <option value='Personal Development'>Personal Development</option>
+                                                        <option value='Design'>Design</option>
+                                                        <option value='Health & Fitness'>Health & Fitness</option>
+                                                        <option value='Marketing'>Marketing</option>
+                                                    </select>
                                                 </div>
 
                                                 <div className="d-flex flex-row align-items-center mb-4">
@@ -111,4 +114,4 @@ const CreateCourse = () => {
     )
 }
 
-export default CreateCourse
+export default CreateCourse

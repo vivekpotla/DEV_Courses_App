@@ -10,17 +10,17 @@ function Development() {
   let [data, setData] = useState([])
 
   useEffect(()=>{
-    axios.get("http://localhost:5003/api/course/")
-    .then(response=>setData(response.data.existingCourse))
+    axios.get("http://localhost:5003/api/course/bytopic/Development")
+    .then(response=>setData (response.data.course))
     .catch(err=>console.log(err))
     console.log(data)
-  })
+  }, [])
 
   return (
     <div className='container'>
     <div >
     <h2 className='mt-5 fw-bold'>Development Courses</h2>
-    <h4 className='mt-5 fw-bold'>Courses to get you started</h4>
+    <h4 className='mt-5 fw-bold'>Couses to get you started</h4>
     </div>
     <hr></hr>
     <div className="row row-cols-sm-3 row-cols-1 text-center">
@@ -33,13 +33,10 @@ function Development() {
     <h4 className='fw-bold mt-5'>Featured Courses</h4>
     
     <Carousel interval={2000}>
-    {data.map((value, key)=>
-      
+      {data.map((value, kay)=>        
         <Carousel.Item interval={5000}>
           <Card data = {value}/>
-        </Carousel.Item>
-      )
-    }
+        </Carousel.Item>)}
       </Carousel>
       <h4 className='fw-bold mt-5'>Popular topics</h4>
       <Carousel>
@@ -116,9 +113,7 @@ function Development() {
       </Carousel>
       <h4 className='fw-bold mt-5'>All Development Courses</h4>
       <p className='fw-bold border p-3'> <FontAwesomeIcon icon={faCircleInfo} className="pe-3" />Not sure? All courses have a 30-day money-back guarantee</p>
-      {
-        data.map((value, ind)=><Card data = {value}/>)
-      }
+      {data.map((value, key)=><Card data = {value}/>)}
     </div>
   </div>
   )

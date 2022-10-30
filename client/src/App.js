@@ -53,7 +53,7 @@ function App() {
    <>
       <Route path="/" element={<Home/>}/>
       <Route path='/home'  element={<Home/>}/>
-      <Route path='/teach' element ={<Teach/>}/>
+      { userType=="learner" && <> <Route path='/teach' element ={<Teach/>}/>
       <Route path='/development'  element={<Development/>}/>
       <Route path='/itsoftware'  element={<Itsoftware/>}/>
       <Route path='/business'  element={<Business/>}/>
@@ -62,7 +62,8 @@ function App() {
       <Route path='/profile'element={<Profile/>} />
       <Route path='/design' element={<Design/>}/>
       <Route path='/health' element={<Health/>}/>
-      <Route path='/personal' element={<Personal/>}/>
+      <Route path='/personal' element={<Personal/>}/> </> }
+     
       <Route path='/profile' element={<Profile/>}/>
       { userType=="instructor" && <Route path='/addcourse' element={<CreateCourse/>}/>}
 

@@ -18,7 +18,7 @@ function Header() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
-
+  const userType = localStorage.getItem("userType");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
@@ -80,7 +80,7 @@ function Header() {
           <div className=" nav-item collapse navbar-collapse" id="navbarNavDropDown">
 
             <ul className="navbar-nav navbar-collapse justify-content-between p-0" >
-              {isLoggedIn &&
+              {isLoggedIn && 
 
                 <li className="nav-item ">
                   {/* <Button className="btn border-0 bg-light text-dark shadow-none ms-3" >Categories</Button> */}
@@ -101,7 +101,7 @@ function Header() {
                   </Dropdown>
                 </li>
               }
-              {!isLoggedIn &&
+              {!isLoggedIn && 
 
                 <li className="nav-item ">
                   {/* <Button className="btn border-0 bg-light text-dark shadow-none ms-3" >Categories</Button> */}
@@ -161,6 +161,8 @@ function Header() {
                   </li>
                   <li className='me-5'>
                     <Link className='nav-link text-dark' to='login' onClick={() => {
+                      localStorage.removeItem("userId");
+                      localStorage.removeItem("userType");
                       dispatch(authActions.logout());
                       navigate("/");
                     }}>LOGOUT</Link>
@@ -168,8 +170,9 @@ function Header() {
 
                 </>}
 
-              {!isLoggedIn && <li className='me-5'>
+              {!isLoggedIn && <li className='me-5 d-flex'>
                 <Link className='nav-link text-dark' to='login'>LOGIN</Link>
+                <Link className='nav-link text-dark' to='signup'>SIGNUP</Link>
               </li>}
             </ul>
 
@@ -181,7 +184,7 @@ function Header() {
       <hr className='m-0 p-0' />
 
       {
-        isLoggedIn &&
+        isLoggedIn && userType=="learner" && 
         <nav className=" navbar navbar-expand-lg bg-light   m-0 p-0 justify-content-between gap-2 w-100">
           <div className=" nav-item collapse navbar-collapse" id="navbarNavDropDown">
 
@@ -194,7 +197,19 @@ function Header() {
               <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='business'>Business</Link></li>
               <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='music'>Music</Link></li>
               <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='health'>Health & Fitness</Link></li>
-              <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='addCourse'>Create Course</Link></li>
+              <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='myCourse'>My Courses</Link></li>
+            </ul>
+          </div>
+        </nav>
+      }
+      {
+        isLoggedIn && userType=="instructor" && 
+        <nav className=" navbar navbar-expand-lg bg-light   m-0 p-0 justify-content-between gap-2 w-100">
+          <div className=" nav-item collapse navbar-collapse" id="navbarNavDropDown">
+
+            <ul className="navbar-nav navbar-collapse d-flex justify-content-center gap-5  ms-4 me-4 " >
+              
+              <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='addCourse'>Create Courses</Link></li>
             </ul>
           </div>
         </nav>

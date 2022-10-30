@@ -2,7 +2,7 @@ import React from 'react'
 import Flogo from '../images/Flogo.png'
 function Footer() {
   return (
-    <div className='bg-dark text-white  footer'>
+    <div className='bg-dark text-white  '>
         <div className="d-flex justify-content-around pt-5 pb-2">
         <ul className="flex-item text-white ">
             <li><a  className=" text-white link1  " href="" >Udemy Business</a></li>

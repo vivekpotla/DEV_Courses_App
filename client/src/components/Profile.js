@@ -1,9 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from "axios";
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBTypography, MDBIcon } from 'mdb-react-ui-kit';
 
 export default function Profile() {
+
+    const userType = localStorage.getItem("userType");
+    const userId  = localStorage.getItem("userId");
+    const [Data,setData] = useState(null);
+    const data = async()=>
+    {
+        const res = await axios.get(`http://localhost:5003/api/${userType}/byid/${userId}`,).catch((err)=>console.log(err));
+        return res.data;
+    }
+    useEffect(()=>
+    {
+      data()
+      .then((data)=>{setData(data.user);
+       } );
+console.log(Data);
+
+    },[])
+  
+    
+ 
   return (
-    <section className="vh-100" style={{ backgroundColor: '#f4f5f7' }}>
+    <section className="vh-200" style={{ backgroundColor: '#f4f5f7' }}>
       <MDBContainer className="py-5 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol lg="6" className="mb-4 mb-lg-0">

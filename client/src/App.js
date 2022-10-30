@@ -63,7 +63,7 @@ function App() {
       <Route path='/design' element={<Design/>}/>
       <Route path='/health' element={<Health/>}/>
       <Route path='/personal' element={<Personal/>}/>
-
+      <Route path='/profile' element={<Profile/>}/>
       { userType=="instructor" && <Route path='/addcourse' element={<CreateCourse/>}/>}
 
    </>
@@ -71,30 +71,8 @@ function App() {
 
 </Routes>
 
-    
-
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     <div className='footer w-100'><Footer/></div> 
+     <Footer/>
     </div>
 
   )

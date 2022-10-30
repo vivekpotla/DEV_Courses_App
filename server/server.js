@@ -5,9 +5,11 @@ import dotenv from 'dotenv';
 import instructorRouter from "./routes/instructorRoutes.js";
 import cors from 'cors';
 import learnerRouter from './routes/learnerRoutes.js';
+import courseRouter from "./routes/courseRoutes.js";
 
 dotenv.config();
 const app= express();
+app.use(cors());
 app.use(bodyParser.json({limit: '30mb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '30mb', extended: true}));
 
@@ -16,6 +18,9 @@ app.use("/api/instructor",instructorRouter);
 
 // http://localhost:5003/api/learner/
 app.use('/api/learner', learnerRouter);
+
+// http://localhost:5003/api/course/
+app.use('/api/course', courseRouter);
 
 const PORT  = process.env.PORT;
 // .then(() => app.listen(PORT, () => console.log(`Server running on port: ${PORT}`)))

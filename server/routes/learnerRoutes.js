@@ -1,5 +1,5 @@
 import express from 'express';
-import { getLearners, signInLearner, signUpLearner } from '../controllers/learnerControllers.js';
+import { getLearners, login, signUpLearner } from '../controllers/learnerControllers.js';
 
 const router= express.Router();
 
@@ -7,7 +7,7 @@ const router= express.Router();
 router.get('/', getLearners);
 
 // for a learner sign-in.
-router.post('/login', signInLearner);
+router.post('/login', login);
 
 // for a learner sign-up.
 router.post('/signup', signUpLearner);

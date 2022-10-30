@@ -22,7 +22,8 @@ function Login() {
   const onFormSubmit = (userCredObj) => {
     const sendRequest = async () => {
       isLoading(true);
-      const res = await axios.post("http://localhost:5003/api/instructor/login",
+      const usertype = "learner"
+      const res = await axios.post(`http://localhost:5003/api/${usertype}/login`,
         {
           email: userCredObj.email,
           password: userCredObj.password
@@ -83,7 +84,7 @@ function Login() {
 
                   <div class="form-check d-flex justify-content-end mb-5">
                     <label class="form-check-label" for="form2Example3">
-                      <a href="#!">Forget Password?</a>
+                      <a href="#!">Forgot Password?</a>
                     </label>
                   </div>
 

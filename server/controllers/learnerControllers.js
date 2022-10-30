@@ -1,7 +1,8 @@
 import expressAsyncHandler from 'express-async-handler';
-import bcryptjs from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Learner from '../model/learnerSchema.js';
+
 
 // to get all the learners.
 export const getLearners= expressAsyncHandler(async (req, res) => {
@@ -10,34 +11,31 @@ export const getLearners= expressAsyncHandler(async (req, res) => {
     res.status(200).json({msg: 'Learners fetched', payload: {learners}});
 })
 
-// for a learner sign-in.
-export const signInLearner= expressAsyncHandler(async (req, res) => {
+export const login = async(req,res,next)=>
+{
+    const{email,password} = req.body;
 
-    let LearnerCredObj= req.body;
+    let existingInst;
 
-    // check if a Learner exists with the given Learner email.
-    let existingLearnerObj= await Learner.findOne({
-        email: LearnerCredObj.email
-    });
-
-    if (!existingLearnerObj) {
-        return res.status(400).json({msg: 'Incorrect Learnername / Password enterred. Retry !'});
+    try {
+        existingInst =await Learner.findOne({email});
+    } catch (error) {
+        return console.log(error);
     }
-
-    // Compare passwords.
-    let isPswdCrct= await bcryptjs.compare(LearnerCredObj.password, existingLearnerObj.password);
-
-    if (!isPswdCrct) {
-        return res.status(400).json({msg: 'Incorrect Email / Password enterred. Retry !'});
+    if(!existingInst)
+    {
+        return res.status(404).json({message:"user Not Found!"});
     }
-    
-    // creating a jwt token for sign-in session.
-    let token= jwt.sign({name: LearnerCredObj.name}, 'cbit-hacktober-2022', {expiresIn: 600});
+    const isPasswordCorrect = bcrypt.compareSync(password,existingInst.password);
 
-    // Sending token to the client.
-    res.status(200).json({msg: 'Login Success', payload: token, LearnerInDB: existingLearnerObj});
-})
+    if(!isPasswordCorrect)
+    {
+        return res.status(404).json({message:"Incorrect Password!"});
 
+    }
+    return res.status(200).json({message:"Login Successfull",user:existingInst});
+
+}
 
 // for a learner sign-up.
 export const signUpLearner= expressAsyncHandler(async (req, res) => {
@@ -55,7 +53,7 @@ export const signUpLearner= expressAsyncHandler(async (req, res) => {
     }
 
     // we can hash the password as the Learner already doesn't exist.
-    let hashedPswd= await bcryptjs.hash(password, 6);
+    let hashedPswd= await bcrypt.hash(password, 6);
 
     // create the given Learner as a doc of our Learner schema type.
     const learner= new Learner({

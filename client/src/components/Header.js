@@ -159,6 +159,9 @@ function Header() {
 </ul>
 
 </nav> */}
+
+
+{/* Only for logged in user  */}
 <nav className=" navbar navbar-expand-lg bg-light   m-0 p-0 justify-content-between gap-2 w-100">
          <div className=" nav-item collapse navbar-collapse" id="navbarNavDropDown">
   
@@ -180,6 +183,7 @@ function Header() {
         </div>
 
 </nav>
+
 <hr className='m-0 p-0'/>
 
     </div>

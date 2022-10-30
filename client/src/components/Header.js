@@ -157,7 +157,7 @@ function Header() {
    
     </li>
     <li className='me-5'>
-    <Link className='nav-link text-dark' to='login'><FontAwesomeIcon icon={faUser}  className='fa-lg'/></Link> 
+    <Link className='nav-link text-dark' to='profile'><FontAwesomeIcon icon={faUser}  className='fa-lg'/></Link> 
    </li>
    <li className='me-5'>
     <Link className='nav-link text-dark' to='login'   onClick={() => {

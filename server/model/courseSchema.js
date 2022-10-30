@@ -49,6 +49,11 @@ const courseSchema  = new Schema({
         type:Number,
         required : true,
     },
+    imageurl:
+    {
+        type : String,
+        required : true,
+    },
     creator:
     {
         type:mongoose.Types.ObjectId,

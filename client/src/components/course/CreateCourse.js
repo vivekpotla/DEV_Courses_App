@@ -1,5 +1,5 @@
 import React from 'react'
-import './SignUp.css'
+import '../SignUpComponent/SignUp.css';
 import { FaUserAlt } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import { RiLockPasswordFill } from 'react-icons/ri'
@@ -12,6 +12,10 @@ const CreateCourse = () => {
 
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [signupButton, isLoading] = useButtonLoader("Signup", "Processing...");
+    const onFormSubmit = (userCredObj)=>
+    {
+
+    }
   return (
       <div>
           <section className="vh-100">

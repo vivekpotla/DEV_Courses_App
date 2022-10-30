@@ -17,6 +17,7 @@ import Personal from './components/Categories/personal';
 import Login from './components/LoginComponent/Login.js';
 import SignUp from './components/SignUpComponent/SignUp';
 import { useDispatch, useSelector } from 'react-redux';
+import CreateCourse from "./components/course/CreateCourse.js";
 import {authActions} from "./store/index.js";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         dispatch(authActions.login());
       }
     },[dispatch]);
+    const userType = localStorage.getItem("userType");
   return (
     
     <div>
@@ -56,10 +58,12 @@ function App() {
       <Route path='/business'  element={<Business/>}/>
       <Route path='/marketing' element={<Marketing/>}/>
       <Route path='/music' element={<Music/>}/>
-
+      
       <Route path='/design' element={<Design/>}/>
       <Route path='/health' element={<Health/>}/>
       <Route path='/personal' element={<Personal/>}/>
+
+      { userType=="instructor" && <Route path='/addcourse' element={<CreateCourse/>}/>}
 
    </>
  )}

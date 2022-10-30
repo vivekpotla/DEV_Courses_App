@@ -34,6 +34,23 @@ export const getCourseByTopic = async(req,res,next)=>
     }
     return res.status(200).json({course});
 }
+export const getCourseById = async(req,res,next)=>
+{
+    const {id} = req.body;
+
+    let course;
+
+    try {
+        course = await Course.findById(id);
+    } catch (error) {
+        return console.log(error);
+    }
+    if(!course)
+    {
+        return res.status(404),json({message:"NO COURSE FOUND!"});
+    }
+    return res.status(200).json({course});
+}
 export const addCourse= async (req, res,next) => {
 
     const {title,topic, description,startDate,startTime,price,creator} = req.body;

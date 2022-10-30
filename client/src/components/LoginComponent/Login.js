@@ -17,13 +17,13 @@ function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [check, setCheck] = useState(false);
+  const [userType, setUserType] = useState("instructor");
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [loginButton,isLoading] = useButtonLoader("Login","Logging In...");
   const onFormSubmit = (userCredObj) => {
     const sendRequest = async () => {
       isLoading(true);
-      const usertype = "learner"
-      const res = await axios.post(`http://localhost:5003/api/${usertype}/login`,
+      const res = await axios.post(`http://localhost:5003/api/${userType}/login`,
         {
           email: userCredObj.email,
           password: userCredObj.password
@@ -33,7 +33,7 @@ function Login() {
         });
 
       const data = await res.data;
-      // console.log(data);
+      console.log(data);
       return data;
 
     }
@@ -81,6 +81,11 @@ function Login() {
                       <input type="password" id="password" className="form-control" placeholder='Password' {...register("password")}/>
                     </div>
                   </div>
+                  <div className='d-flex justify-content-end gap-2 m-2'>
+                          <div  className={userType =="instructor"? 'type-btn type-btn-color' : 'type-btn'} onClick={() => { setUserType("instructor") }}>Instructor</div>
+                          <div className={userType =="instructor" ? 'type-btn' : 'type-btn type-btn-color'} onClick={() => { setUserType("learner") }}>Learner</div>
+                        </div>
+
 
                   <div class="form-check d-flex justify-content-end mb-5">
                     <label class="form-check-label" for="form2Example3">

@@ -8,18 +8,23 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import useButtonLoader from '../useButtonLoader';
 import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux'
+import { authActions } from '../../store'
+
 
 function SignUp() {
 
   const navigate = useNavigate();
-  const [userType, setUserType] = useState(true);
+  const dispatch = useDispatch();
+  const [userType, setUserType] = useState("instructor");
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const [check, setCheck] = useState(false);
   const [signupButton, isLoading] = useButtonLoader("Signup", "Processing...");
   const onFormSubmit = (userCredObj) => {
     console.log(userCredObj);
     const sendRequest = async () => {
       isLoading(true);
-      const res = await axios.post("http://localhost:5003/api/learner/signup",
+      const res = await axios.post(`http://localhost:5003/api/${userType}/signup`,
         {
           name: userCredObj.name,
           email: userCredObj.email,
@@ -27,12 +32,23 @@ function SignUp() {
           mobileno: userCredObj.phone
         }).catch((err) => isLoading(false))
       const data = await res.data;
+      console.log(data);
       return data;
 
     }
     sendRequest()
-      .then(() => isLoading(false))
-      .then(() => navigate("/login"));
+      .then((data) => {
+       
+          localStorage.setItem("userId", data.user._id);
+          localStorage.setItem("userType",userType);
+          setCheck(false);
+          dispatch(authActions.login());
+          isLoading(false);
+          navigate("/");
+          
+      
+      })
+
   }
 
   return (
@@ -52,35 +68,39 @@ function SignUp() {
                         <div className="d-flex flex-row align-items-center mb-4">
                           <FaUserAlt />
                           <div className="form-outline flex-fill mb-0 ms-3">
-                            <input type="text" id="name" className="form-control" placeholder='Name' {...register("name")} />
-                            {errors.name?.type === 'required' && <p>ERUI</p>}
+                            <input type="text" id="name" className="form-control" placeholder='Name' {...register("name",{required:true})} />
+                            {errors.name?.type === 'required' && <p className='text-danger'>*Name is Required</p>}
                           </div>
                         </div>
 
                         <div className="d-flex flex-row align-items-center mb-4">
                           <MdEmail />
                           <div className="form-outline flex-fill mb-0 ms-3">
-                            <input type="email" id="email" className="form-control" placeholder='Email' {...register("email")} />
+                            <input type="email" id="email" className="form-control" placeholder='Email' {...register("email",{required:true})} />
+                            {errors.email?.type === 'required' && <p className='text-danger'>*Email Required</p>}
                           </div>
                         </div>
 
                         <div className="d-flex flex-row align-items-center mb-4">
                           <RiLockPasswordFill />
                           <div className="form-outline flex-fill mb-0 ms-3">
-                            <input type="password" id="password" className="form-control" placeholder='Password' {...register("password")} />
+                            <input type="password" id="password" className="form-control" placeholder='Password' {...register("password",{required:true})} />
+                            {errors.password?.type === 'required' && <p className='text-danger'>*Password Required</p>}
                           </div>
                         </div>
 
                         <div className="d-flex flex-row align-items-center mb-4">
                           <BsFillTelephoneFill />
                           <div className="form-outline flex-fill mb-0 ms-3">
-                            <input type="number" id="phone" className="form-control" placeholder='Mobile Number' {...register("phone")} />
+                            <input type="number" id="phone" className="form-control" placeholder='Mobile Number' {...register("phone",{required:true})} />
+                            {errors.phone?.type === 'required' && <p className='text-danger'>*Mobile Number Required</p>}
+
                           </div>
                         </div>
 
-                        <div className='d-flex justify-content-end gap-2'>
-                          <button className={userType ? 'type-btn type-btn-color' : 'type-btn'} onClick={() => { setUserType(true) }}>Instructor</button>
-                          <button className={userType ? 'type-btn' : 'type-btn type-btn-color'} onClick={() => { setUserType(false) }}>Learner</button>
+                        <div className='d-flex justify-content-end gap-2 m-2'>
+                          <div  className={userType =="instructor"? 'type-btn type-btn-color' : 'type-btn'} onClick={() => { setUserType("instructor") }}>Instructor</div>
+                          <div className={userType =="instructor" ? 'type-btn' : 'type-btn type-btn-color'} onClick={() => { setUserType("learner") }}>Learner</div>
                         </div>
 
                         <div className="form-check d-flex justify-content-center mb-5">
@@ -113,4 +133,4 @@ function SignUp() {
   )
 }
 
-export default SignUp
+export default SignUp

@@ -50,7 +50,7 @@ export const signup = async(req,res,next)=>
     {
         return res.status(404).json({message:"User Creation Failed!"});
     }
-    return res.status(201).json({Inst});
+    return res.status(201).json({user:Inst});
 }
 
 export const login = async(req,res,next)=>

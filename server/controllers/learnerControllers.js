@@ -67,5 +67,5 @@ export const signUpLearner= expressAsyncHandler(async (req, res) => {
     // to save the doc inside the DB.
     await learner.save();
 
-    res.status(201).json({msg: 'New Learner Created', payload: {learner}});
+    res.status(201).json({user:learner});
 })

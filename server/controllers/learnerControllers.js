@@ -11,6 +11,24 @@ export const getLearners= expressAsyncHandler(async (req, res) => {
     res.status(200).json({msg: 'Learners fetched', payload: {learners}});
 })
 
+export const getLearnerById = async(req,res,next)=>
+{
+    const id = req.params.id;
+
+    let learner;
+
+    try {
+        learner = await Learner.findById(id);
+    } catch (error) {
+        return console.log(error);
+    }
+    if(!learner)
+    {
+        return res.status(404).json({message:"NO learner FOUND!"});
+    }
+    return res.status(200).json({user:learner});
+}
+
 export const login = async(req,res,next)=>
 {
     const{email,password} = req.body;
@@ -67,5 +85,5 @@ export const signUpLearner= expressAsyncHandler(async (req, res) => {
     // to save the doc inside the DB.
     await learner.save();
 
-    res.status(201).json({msg: 'New Learner Created', payload: {learner}});
+    res.status(201).json({user:learner});
 })

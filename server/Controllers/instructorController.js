@@ -17,6 +17,25 @@ export const getAllInstructor =  async(req,res,next)=>
     }
     return res.status(200).json({instructors});
 }
+
+export const getInstructorById = async(req,res,next)=>
+{
+    const id = req.params.id;
+
+    let instructor;
+
+    try {
+        instructor = await Instructor.findById(id);
+    } catch (error) {
+        return console.log(error);
+    }
+    if(!instructor)
+    {
+        return res.status(404).json({message:"NO instructor FOUND!"});
+    }
+    return res.status(200).json({user:instructor});
+}
+
 export const signup = async(req,res,next)=>
 {
     const {name,email,password,mobileno} = req.body;
@@ -50,7 +69,7 @@ export const signup = async(req,res,next)=>
     {
         return res.status(404).json({message:"User Creation Failed!"});
     }
-    return res.status(201).json({Inst});
+    return res.status(201).json({user:Inst});
 }
 
 export const login = async(req,res,next)=>

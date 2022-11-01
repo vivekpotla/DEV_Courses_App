@@ -17,14 +17,50 @@ export const getAllCourse = async(req,res,next)=>
     }
     return res.status(200).json({existingCourse});
 }
+// export const getCourseByTopic = async(req,res,next)=>
+// {
+//     const {topic} = req.body;
+
+//     let course;
+
+//     try {
+//         course = await Course.find({topic});
+//     } catch (error) {
+//         return console.log(error);
+//     }
+//     if(!course)
+//     {
+//         return res.status(404),json({message:"NO COURSE FOUND!"});
+//     }
+//     return res.status(200).json({course});
+// }
 export const getCourseByTopic = async(req,res,next)=>
 {
-    const {topic} = req.body;
+    const id = req.params.id;
 
     let course;
 
     try {
-        course = await Course.find({topic});
+        console.log(id)
+        course = await Course.find({topic:id});
+    } catch (error) {
+        return console.log(error);
+    }
+    if(!course)
+    {
+        return res.status(404),json({message:"NO COURSE FOUND!"});
+    }
+    return res.status(200).json({course});
+}
+
+export const getCourseById = async(req,res,next)=>
+{
+    const {id} = req.body;
+
+    let course;
+
+    try {
+        course = await Course.findById(id);
     } catch (error) {
         return console.log(error);
     }
@@ -36,13 +72,13 @@ export const getCourseByTopic = async(req,res,next)=>
 }
 export const addCourse= async (req, res,next) => {
 
-    const {title,topic, description,startDate,startTime,price,creator} = req.body;
+    const {title,topic, description,startDate,startTime,price,creator,imageurl} = req.body;
 
     const course= new Course({
         title,
         topic,
         description,
-        startDate,startTime,price,creator,learners:[],
+        startDate,startTime,price,creator,learners:[],imageurl
     });
     let existingUser;
 

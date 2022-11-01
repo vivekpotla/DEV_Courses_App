@@ -5,12 +5,12 @@ import axios from 'axios'
 import { useState } from 'react'
 import {faCirclePlay,faStar,faInfinity,faIndianRupeeSign,faCircleInfo,faStarHalf} from '@fortawesome/free-solid-svg-icons'
 import Card from './Card'
-function Itsoftware() {
+function Teach() {
 
   let [data, setData] = useState([])
 
   useEffect(()=>{
-    axios.get("http://localhost:5003/api/course/bytopic/IT & Software")
+    axios.get("http://localhost:5003/api/course/bytopic/Teach")
     .then(response=>setData (response.data.course))
     .catch(err=>console.log(err))
     console.log(data)
@@ -19,7 +19,7 @@ function Itsoftware() {
   return (
     <div className='container'>
     <div >
-    <h2 className='mt-5 fw-bold'>Itsoftware Courses</h2>
+    <h2 className='mt-5 fw-bold'>Teach Courses</h2>
     <h4 className='mt-5 fw-bold'>Couses to get you started</h4>
     </div>
     <hr></hr>
@@ -59,7 +59,7 @@ function Itsoftware() {
         </p>
       </div>
       <div className='row container fw-bold text-center'>
-      <p className="col-sm border pt-3 pb-3 me-1">Web Itsoftware
+      <p className="col-sm border pt-3 pb-3 me-1">Web Teach
         </p>
         <p className="col-sm border pt-3 pb-3 me-1">
           Java
@@ -111,7 +111,7 @@ function Itsoftware() {
       </div>
         </Carousel.Item>
       </Carousel>
-      <h4 className='fw-bold mt-5'>All Itsoftware Courses</h4>
+      <h4 className='fw-bold mt-5'>All Teach Courses</h4>
       <p className='fw-bold border p-3'> <FontAwesomeIcon icon={faCircleInfo} className="pe-3" />Not sure? All courses have a 30-day money-back guarantee</p>
       {data.map((value, key)=><Card data = {value}/>)}
     </div>
@@ -119,4 +119,4 @@ function Itsoftware() {
   )
 }
 
-export default Itsoftware
+export default Teach

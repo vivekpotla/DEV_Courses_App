@@ -4,6 +4,9 @@ import {Card,Button} from 'react-bootstrap'
 import Carousel from 'react-bootstrap/Carousel'
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faCirclePlay,faStar,faInfinity,faIndianRupeeSign,faCircleInfo,faStarHalf} from '@fortawesome/free-solid-svg-icons'
+import AIImage from '../images/aicourse.png'
+import MLImage from '../images/ml_course.png'
+import HealthImg from '../images/health.png'
 function Home() {
   return (
     <div className='container'>
@@ -30,7 +33,7 @@ function Home() {
 
 
 
-        <Carousel interval={3000} className='mt-3'>
+        <Carousel interval={3000} className='mt-3 mb-5'>
 
               <Carousel.Item>
 
@@ -53,7 +56,7 @@ function Home() {
 </div>
 <div className='col-sm-3'>
 <Card style={{ }}>
-   <Card.Img variant="top" src="https://www.webhopersaustralia.com/wp-content/uploads/2021/06/web-design-agencies-sydney.png" />
+   <Card.Img variant="top" src={AIImage} />
      <Card.Body>
          <Card.Title className=''>Front End Web Development Ultimate Course 2022</Card.Title>
            <Card.Text>
@@ -67,7 +70,7 @@ function Home() {
 </div>
 <div className='col-sm-3'>
 <Card style={{ }}>
-   <Card.Img variant="top" src="https://www.webhopersaustralia.com/wp-content/uploads/2021/06/web-design-agencies-sydney.png" />
+   <Card.Img variant="top" src={MLImage} />
      <Card.Body>
          <Card.Title className=''>Front End Web Development Ultimate Course 2022</Card.Title>
            <Card.Text>
@@ -81,7 +84,7 @@ function Home() {
 </div>
 <div className='col-sm-3'>
 <Card style={{ }}>
-   <Card.Img variant="top" src="https://www.webhopersaustralia.com/wp-content/uploads/2021/06/web-design-agencies-sydney.png" />
+   <Card.Img variant="top" src={HealthImg} />
      <Card.Body>
          <Card.Title className=''>Front End Web Development Ultimate Course 2022</Card.Title>
            <Card.Text>

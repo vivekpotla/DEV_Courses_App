@@ -88,9 +88,9 @@ function Login() {
                         </div>
 
 
-                  <div class="form-check d-flex justify-content-end mb-5">
+                  <div class="form-check d-flex justify-content-end mb-5 mt-3 ">
                     <label class="form-check-label" for="form2Example3">
-                      <a href="#!">Forgot Password?</a>
+                      <a href="#!" className=''>Forgot Password?</a>
                     </label>
                   </div>
 

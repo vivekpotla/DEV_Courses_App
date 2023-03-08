@@ -46,6 +46,15 @@ function App() {
        <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='/home'  element={<Home/>}/>
+        <Route path='/development'  element={<Development/>}/>
+        <Route path='/itsoftware'  element={<Itsoftware/>}/>
+        <Route path='/business'  element={<Business/>}/>
+        <Route path='/marketing' element={<Marketing/>}/>
+        <Route path='/music' element={<Music/>}/>
+        <Route path='/profile'element={<Profile/>} />
+        <Route path='/design' element={<Design/>}/>
+        <Route path='/health' element={<Health/>}/>
+        <Route path='/personal' element={<Personal/>}/>
       
         
         </>):

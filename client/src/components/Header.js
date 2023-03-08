@@ -8,9 +8,6 @@ import { useState } from 'react'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import { useDispatch, useSelector } from 'react-redux'
 import { authActions } from "../store/index.js";
-
-// import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
-// import {Form} from 'react-bootstrap/Form'
 function Header() {
 
 
@@ -30,7 +27,7 @@ function Header() {
       <div className='first-navbar w-100'>
         <nav className="w-100 navbar navbar-expand-lg bg-light  p-2 m-0 justify-content-between gap-2" >
 
-          <a className="ms-3 nav-item me-0" href="/home"><img src={Logo} alt="Logo" style={{ width: '6rem' }} /></a>
+          <a className="ms-3 nav-item me-0" href="/home"><img src={Logo} alt="Logo" style={{ width: '6rem' }} className='rounded'/></a>
 
 
           {/* Collapse button  */}
@@ -96,28 +93,26 @@ function Header() {
                       <Dropdown.Item href="/design" className='p-2'>Design</Dropdown.Item>
                       <Dropdown.Item href="/health" className='p-2'>Health & Fitness</Dropdown.Item>
                       <Dropdown.Item href="/marketing" className='p-2'>Marketing</Dropdown.Item>
-                      <Dropdown.Item href="/addCourse" className='p-2'>Create Course</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 </li>
               }
               {!isLoggedIn && 
 
-                <li className="nav-item ">
+                <li className="nav-item ms-3">
                   {/* <Button className="btn border-0 bg-light text-dark shadow-none ms-3" >Categories</Button> */}
                   <Dropdown className=''>
                     <Dropdown.Toggle id="dropdown-basic" className='bg-light text-dark shadow-none border-0'>Categories</Dropdown.Toggle>
 
                     <Dropdown.Menu className='p-2 dropdown-menu shadow'>
-                      <Dropdown.Item className='p-2'>Development</Dropdown.Item>
-                      <Dropdown.Item className='p-2'>Business</Dropdown.Item>
-                      <Dropdown.Item className='p-2'>Music</Dropdown.Item>
-                      <Dropdown.Item className='p-2'>IT & Software</Dropdown.Item>
-                      <Dropdown.Item className='p-2'>Personal Development</Dropdown.Item>
-                      <Dropdown.Item className='p-2'>Design</Dropdown.Item>
-                      <Dropdown.Item className='p-2'>Health & Fitness</Dropdown.Item>
-                      <Dropdown.Item className='p-2'>Marketing</Dropdown.Item>
-                      <Dropdown.Item className='p-2'>Create Course</Dropdown.Item>
+                    <Dropdown.Item href="/development" className='p-2'>Development</Dropdown.Item>
+                      <Dropdown.Item href="/business" className='p-2'>Business</Dropdown.Item>
+                      <Dropdown.Item href="/music" className='p-2'>Music</Dropdown.Item>
+                      <Dropdown.Item href="/itsoftware" className='p-2'>IT & Software</Dropdown.Item>
+                      <Dropdown.Item href="/personal" className='p-2'>Personal Development</Dropdown.Item>
+                      <Dropdown.Item href="/design" className='p-2'>Design</Dropdown.Item>
+                      <Dropdown.Item href="/health" className='p-2'>Health & Fitness</Dropdown.Item>
+                      <Dropdown.Item href="/marketing" className='p-2'>Marketing</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                 </li>
@@ -144,15 +139,6 @@ function Header() {
 
 
 
-<<<<<<< HEAD
-{
-  isLoggedIn && 
-  <>
-  <nav className=" navbar navbar-expand-lg bg-light   m-0 p-0 justify-content-between gap-2 w-100">
-         <div className=" nav-item collapse navbar-collapse" id="navbarNavDropDown">
-  
-         <ul className="navbar-nav navbar-collapse d-flex justify-content-center gap-5  ms-4 me-4 " >
-=======
               {isLoggedIn &&
                 <>
                   <li>
@@ -179,9 +165,9 @@ function Header() {
 
                 </>}
 
-              {!isLoggedIn && <li className='me-5 d-flex'>
-                <Link className='nav-link text-dark' to='login'>LOGIN</Link>
-                <Link className='nav-link text-dark' to='signup'>SIGNUP</Link>
+              {!isLoggedIn && <li className='me-5 d-flex gap-5'>
+                <Link className='nav-link text-dark' to='login'> <b>LOGIN</b></Link>
+                <Link className='nav-link text-dark' to='signup'><b>SIGNUP</b></Link>
               </li>}
             </ul>
 
@@ -192,13 +178,14 @@ function Header() {
       </div>
       <hr className='m-0 p-0' />
 
-      {
-        isLoggedIn && userType=="learner" && 
-        <nav className=" navbar navbar-expand-lg bg-light   m-0 p-0 justify-content-between gap-2 w-100">
+      
+        
+      {  
+          ((isLoggedIn && userType=="learner")|| (!isLoggedIn)) &&
+         <nav className=" navbar navbar-expand-lg bg-light   m-0 p-0 justify-content-between gap-2 w-100">
           <div className=" nav-item collapse navbar-collapse" id="navbarNavDropDown">
 
             <ul className="navbar-nav navbar-collapse d-flex justify-content-center gap-5  ms-4 me-4 " >
->>>>>>> eabbe71aec077ed348bd428ddb488af4fc35d2ec
               <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='development'>Development</Link></li>
               <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='marketing'>Marketing</Link></li>
               <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='itsoftware'>IT & Software</Link></li>
@@ -207,27 +194,27 @@ function Header() {
               <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='business'>Business</Link></li>
               <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='music'>Music</Link></li>
               <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='health'>Health & Fitness</Link></li>
-<<<<<<< HEAD
-         </ul>
-        </div>
-</nav>
-</>
-}
-=======
-              <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='myCourse'>My Courses</Link></li>
+              { isLoggedIn && userType=="learner" &&  
+                <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='myCourse'>My Courses</Link></li>
+                
+              
+                
+                
+                }
+
+
             </ul>
           </div>
-        </nav>
-      }
+        </nav>}
+      
       {
         isLoggedIn && userType=="instructor" && 
-        <nav className=" navbar navbar-expand-lg bg-light   m-0 p-0 justify-content-between gap-2 w-100">
+        <nav className=" navbar navbar-expand-lg bg-dark text-white  m-0 p-0 justify-content-between gap-2 w-100">
           <div className=" nav-item collapse navbar-collapse" id="navbarNavDropDown">
->>>>>>> eabbe71aec077ed348bd428ddb488af4fc35d2ec
 
             <ul className="navbar-nav navbar-collapse d-flex justify-content-center gap-5  ms-4 me-4 " >
               
-              <li className="nav-item nav-items-2"><Link className='nav-link text-dark' to='addCourse'>Create Courses</Link></li>
+              <li className="nav-item nav-items-2"><Link className='nav-link text-white' to='addCourse'> + Create Courses</Link></li>
             </ul>
           </div>
         </nav>

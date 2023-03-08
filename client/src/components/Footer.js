@@ -5,8 +5,8 @@ function Footer() {
     <div className='bg-dark text-white  '>
         <div className="d-flex justify-content-around pt-5 pb-2">
         <ul className="flex-item text-white ">
-            <li><a  className=" text-white link1  " href="" >Udemy Business</a></li>
-            <li><a className=" text-white link1" href="">Teach on Udemy</a></li>
+            <li><a  className=" text-white link1  " href="" >Dev Business</a></li>
+            <li><a className=" text-white link1" href="">Teach on Dev</a></li>
             <li><a className=" text-white link1" href="" >Get the app</a></li>
             <li><a className=" text-white link1"  href="">About us</a></li>
             <li><a className="text-white link1" href="">Contact us</a></li>
@@ -35,10 +35,10 @@ function Footer() {
 
             <div className="text-center d-flex justify-content-around p-3">
                 <div className="flex-item" data-purpose="logo-container">
-                    <img src={Flogo} alt="" style={{width:"6rem"}}/>
+                    <img src={Flogo} alt="" style={{width:"6rem"}} className='rounded'/>
                    </div>
 
-            <div className="flex-item my-auto" data-purpose="footer-copyright">© 2022 Udemy, Inc.</div>
+            <div className="flex-item my-auto" data-purpose="footer-copyright">© 2023 Dev , Inc</div>
        
         
 

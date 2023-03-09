@@ -1,5 +1,5 @@
-import Course from "../model/courseSchema.js";
-import Instructor from "../model/instructorSchema.js";
+import Course from "../model/courseSchema.js.js";
+import Instructor from "../model/instructorSchema.js.js";
 import Learner from "../model/learnerSchema.js";
 import mongoose from "mongoose";
 
